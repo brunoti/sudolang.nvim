@@ -1,0 +1,85 @@
+-- Test SudoLang syntax highlighting
+-- This file contains examples of all SudoLang constructs
+
+// Line comment
+/* Block comment
+   spanning multiple lines */
+
+// Keywords and control flow
+function greet(name) {
+  if name == "World" {
+    log("Hello, World!")
+  } else {
+    log("Hello, " + name)
+  }
+}
+
+fn shortFunc() {
+  return true
+}
+
+// Variables
+$myVariable = "test"
+$count = 42
+$isActive = true
+$nothing = null
+
+// Strings
+"double quoted string"
+`template string with $myVariable`
+
+// Operators
+$result = 1 + 2 - 3 * 4 / 5
+$comparison = $a > $b && $c <= $d
+$pipeline = data |> filter |> map |> reduce
+
+// Commands
+/help
+/ask "What is SudoLang?"
+/explain
+
+// Interfaces
+User {
+  name: string
+  age: number
+  active: boolean
+}
+
+Response {
+  status: number
+  data: object
+  message: string
+}
+
+// Constraints
+constraint: $age > 18
+constraints {
+  $name != empty
+  $email contains "@"
+}
+
+// Functions with various keywords
+map($items, fn(item) { return item * 2 })
+filter($users, where $age > 21)
+groupBy($data, $category)
+
+// Complex expressions
+$users
+  |> filter(where $active == true)
+  |> map(pick("name", "email"))
+  |> sortBy("name")
+  |> take(10)
+
+// Numbers and booleans
+$pi = 3.14159
+$count = 42
+$isValid = true
+$isDisabled = false
+
+// Markdown headers (for .sudo.md files)
+# Main Title
+## Section Title
+### Subsection
+#### Details
+##### Notes
+###### Fine Print

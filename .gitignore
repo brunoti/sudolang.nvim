@@ -1,0 +1,24 @@
+# Neovim
+*.swp
+*.swo
+*~
+
+# Lua
+luac.out
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Test artifacts
+test/results/
+coverage/
+
+# Build artifacts
+*.so
+*.dylib
+*.dll

@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test on Neovim ${{ matrix.neovim_version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        neovim_version: ['v0.9.5', 'v0.10.0', 'nightly']
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.neovim_version }}
+
+      - name: Check Neovim version
+        run: nvim --version
+
+      - name: Run syntax tests
+        run: |
+          nvim --headless -u NONE \
+            -c "set runtimepath+=." \
+            -c "source syntax/sudolang.lua" \
+            -c "edit test/fixtures/syntax_test.sudo" \
+            -c "quit"
+
+      - name: Test filetype detection
+        run: |
+          nvim --headless -u NONE \
+            -c "set runtimepath+=." \
+            -c "source ftdetect/sudolang.lua" \
+            -c "edit test/fixtures/syntax_test.sudo" \
+            -c "if &filetype != 'sudolang' | cquit 1 | endif" \
+            -c "quit"
+
+  lint:
+    name: Lint Lua code
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Lua
+        uses: leafo/gh-actions-lua@v10
+        with:
+          luaVersion: "5.1"
+
+      - name: Install LuaRocks
+        uses: leafo/gh-actions-luarocks@v4
+
+      - name: Install luacheck
+        run: luarocks install luacheck
+
+      - name: Run luacheck
+        run: luacheck lua/ --globals vim
+
+      - name: Install stylua
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
