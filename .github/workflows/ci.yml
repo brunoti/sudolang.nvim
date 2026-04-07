@@ -67,9 +67,9 @@ jobs:
       - name: Run luacheck
         run: luacheck lua/ --globals vim
 
-      - name: Install stylua
-        uses: JohnnyMorganz/stylua-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: latest
-          args: --check .
+      - name: Check formatting with stylua
+        run: |
+          curl -Lo stylua.zip https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux.zip
+          unzip stylua.zip
+          chmod +x stylua
+          ./stylua --check .
