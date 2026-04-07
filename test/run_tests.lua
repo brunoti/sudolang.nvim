@@ -15,7 +15,7 @@ local tests_failed = 0
 
 local function test_filetype_detection()
   print("Testing filetype detection...")
-  
+
   -- Test .sudo files
   local ok, err = pcall(function()
     vim.cmd("edit test/fixtures/syntax_test.sudo")
@@ -27,12 +27,12 @@ local function test_filetype_detection()
     vim.cmd("bwipeout!")
     tests_passed = tests_passed + 1
   end)
-  
+
   if not ok then
     print("  ✗ .sudo file test failed: " .. tostring(err))
     tests_failed = tests_failed + 1
   end
-  
+
   -- Test .sudo.md files
   ok, err = pcall(function()
     vim.cmd("edit test/fixtures/markdown_test.sudo.md")
@@ -44,7 +44,7 @@ local function test_filetype_detection()
     vim.cmd("bwipeout!")
     tests_passed = tests_passed + 1
   end)
-  
+
   if not ok then
     print("  ✗ .sudo.md file test failed: " .. tostring(err))
     tests_failed = tests_failed + 1
@@ -53,7 +53,7 @@ end
 
 local function test_plugin_loaded()
   print("\nTesting plugin config...")
-  
+
   local ok, err = pcall(function()
     local M = dofile("lua/sudolang/init.lua")
     if M.config.markdown_integration ~= true then
@@ -62,7 +62,7 @@ local function test_plugin_loaded()
     print("  ✓ Plugin config loaded correctly")
     tests_passed = tests_passed + 1
   end)
-  
+
   if not ok then
     print("  ✗ Plugin config test failed: " .. tostring(err))
     tests_failed = tests_failed + 1
@@ -74,9 +74,9 @@ local function run_tests()
   print("Running sudolang.nvim tests...\n")
   test_filetype_detection()
   test_plugin_loaded()
-  
+
   print(string.format("\nResults: %d passed, %d failed", tests_passed, tests_failed))
-  
+
   if tests_failed == 0 then
     print("✓ All tests passed!")
     os.exit(0)

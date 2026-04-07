@@ -5,23 +5,27 @@ if vim.b.current_syntax then
   return
 end
 
-local config = require('sudolang').config-- Clear existing syntax
-vim.cmd('syntax clear')
+local config = require("sudolang").config
+
+-- Clear existing syntax
+vim.cmd("syntax clear")
 
 -- Keywords
-vim.cmd('syntax keyword sudolangKeyword ask case concat constraint constraints contains continue convert count default defaults describe else emit empty error escape every exists explain filter find first flatMap flatten fn for function groupBy if in includes interface interpolate join list log loop map match max merge min normalize orderBy otherwise pick pluck range replace require requirements reverse revise select skip slice some sort sortBy split take takeLast takeLatest takeUntil takeWhile throw transpile trim unique warn warnings where while wrap zip')
+vim.cmd(
+  "syntax keyword sudolangKeyword ask case concat constraint constraints contains continue convert count default defaults describe else emit empty error escape every exists explain filter find first flatMap flatten fn for function groupBy if in includes interface interpolate join list log loop map match max merge min normalize orderBy otherwise pick pluck range replace require requirements reverse revise select skip slice some sort sortBy split take takeLast takeLatest takeUntil takeWhile throw transpile trim unique warn warnings where while wrap zip"
+)
 
 -- Operators
 vim.cmd([[syntax match sudolangOperator /[+\-*/%]/]])
 vim.cmd([[syntax match sudolangOperator /&&\|||\|!/]])
 vim.cmd([[syntax match sudolangOperator /<\|>\|<=\|>=\|==\|!=/]])
 vim.cmd([[syntax match sudolangOperator /|>/]])
-vim.cmd([[syntax match sudolangOperator /=\|+=\|-=\|*=\|\/=/]])
+vim.cmd([[syntax match sudolangOperator /=\|+=\|-=\|*=\|\\//]])
 vim.cmd([[syntax keyword sudolangOperator cap cup xor]])
 
 -- Comments
 vim.cmd([[syntax match sudolangComment /\/\/.*$/]])
-vim.cmd([[syntax region sudolangComment start="/\*" end="\*\"/"]])
+vim.cmd([[syntax region sudolangComment start="/\*" end="\*\/"]])
 
 -- Strings
 vim.cmd([[syntax region sudolangString start=/"/ end=/"/]])
