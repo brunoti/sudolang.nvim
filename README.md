@@ -17,7 +17,7 @@ Neovim plugin providing syntax highlighting and editor support for [SudoLang](ht
 
 ```lua
 {
-  'yourusername/sudolang.nvim',
+  'brunoti/sudolang.nvim',
   ft = { 'sudolang' },
   config = function()
     require('sudolang').setup()
@@ -29,7 +29,7 @@ Neovim plugin providing syntax highlighting and editor support for [SudoLang](ht
 
 ```lua
 use {
-  'yourusername/sudolang.nvim',
+  'brunoti/sudolang.nvim',
   ft = { 'sudolang' },
   config = function()
     require('sudolang').setup()
@@ -42,7 +42,7 @@ use {
 Clone this repository into your Neovim config directory:
 
 ```bash
-git clone https://github.com/yourusername/sudolang.nvim ~/.config/nvim/pack/plugins/start/sudolang.nvim
+git clone https://github.com/brunoti/sudolang.nvim ~/.config/nvim/pack/plugins/start/sudolang.nvim
 ```
 
 ## Usage
